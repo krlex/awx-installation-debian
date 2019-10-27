@@ -6,8 +6,7 @@ export TOOLS=~/awx/tools/
 export INSTALLER=~/awx/installer/
 
 echo "Upgrade and installation common"
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y vim net-tools git curl python-pip python3-pip apt-transport-https ca-certificates gnupg2  software-properties-common
+sudo apt install -y vim net-tools git curl python-pip python3-pip apt-transport-https ca-certificates gnupg2  software-properties-common python-docker > /dev/null 2>&1
 
 echo "Git cloning AWX from krlex/awx github repo 7.0 version"
 sudo git clone https://github.com/krlex/awx $HOME/awx
@@ -23,17 +22,17 @@ echo "Accepting key for Docker"
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
 echo "Update for docker"
-sudo apt update
+sudo apt update > /dev/null 2>&1
 
 echo "Installation docker"
-sudo yum -y install docker-ce docker-ce-cli containerd.io
+sudo apt install -y docker-ce docker-ce-cli containerd.io> /dev/null 2>&1
 
 echo "Starting docker"
 sudo systemctl start docker
 
 echo "Install ansible"
-sudo pip install docker-compose
-sudo pip install docker-py ansible
+sudo pip install docker-compose > /dev/null 2>&1
+sudo pip install ansible > /dev/null 2>&1
 
 echo "Docker-compose starting ...."
 cd $TOOLS
